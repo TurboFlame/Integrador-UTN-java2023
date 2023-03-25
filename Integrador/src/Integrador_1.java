@@ -27,13 +27,6 @@ public class Integrador_1 {
 		
 		Polonia.PuntajeFIFA=1548;
 		
-		Argentina.Puntaje=0;
-		
-		ArabiaS.Puntaje=0;
-				
-		Mexico.Puntaje=0;
-		
-		Polonia.Puntaje=0;
 				
 				
 		grupo grupoA=new grupo();
