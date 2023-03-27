@@ -10,9 +10,9 @@ public class Integrador_1 {
 		// TODO Auto-generated method stub
 
 		
+	//el codigo funciona, pero falta mucho para que sea entendible. Se seguira actualizando en dias proximos.				
 		
-		
-		
+	//recomiendo desactivar los comentarios, ya que solo los use para recordatorios y borrar codigo.	
 		
 		
 		
