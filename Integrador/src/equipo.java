@@ -3,43 +3,21 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+
+
 public class equipo{
 	//Creador de equipos
 	String País;
 	int Puntaje=0;
 	int PuntajeFIFA;
-	
-	
-	
-	
-	
 
-	
 	            
-	/*public static equipo CreadorEquiposAuto(String direccion, int numeroDeFila) throws IOException{
-		CSVReader reader = new CSVReader(new FileReader(direccion));
-		int FilaActual=1;
-		String [] row;
-		while ((row = reader.readNext()) !=null) {
-		if FilaActual==numeroDeFila{
-		
-		String =
-		
-		
-		
-		
-		
-		}
-		
-		}
-		
-		
-		
-	}*/
 	
+	
+	
+	//con este metodo coloco todos los equipos en un array list.
 	public List<equipo> crearEquiposAuto()throws IOException, CsvValidationException, NumberFormatException{
     String direccion=("D:\\Repositorios\\Integrador-UTN-java2023\\Integrador\\ExcelEquipos.csv");
 	List<equipo> equipos=new ArrayList<>();
@@ -68,7 +46,9 @@ public class equipo{
 	*/
 	
 	
-	//getter que me otorga un equipo ingresando el parametro pais
+	//Este metodo es basicamente un getter que compara el nombre del equipo con un String que se le provea y otorga el objeto que coincida.
+	//Lo utilizo ya que por el metodo usado para crear los array list no encontre la manera de llamar a los objetos
+	//individualmente de forma tradicional
 	public static equipo getEquipo(String País,List<equipo> equipos){
 	
 	
@@ -87,19 +67,28 @@ public class equipo{
 	
 	
 	
-	
+	//este metodo fue un "prototipo" del metodo de prediccion. Lo mantengo disponible ya que
+	//resulta util para algunos testeos
 	public static void Prediccion(equipo equipo1,equipo equipo2) {
-	         //Metodo para comparar ranking de equipos y su winrate aproximado
+	         
      int difPuntaje=equipo1.PuntajeFIFA-equipo2.PuntajeFIFA;
-//encuentro la diferencia de puntos y a partir de esta imprimo en consola
-//la diferencia de habilidad entre equipos
-     if (difPuntaje<=-100)
+
+     if (100<=difPuntaje)
     	 System.out.println(equipo1.País + " gana a " + equipo2.País);
-     else if ((difPuntos>100) && (difPuntos<-100))
-    	 System.out.println(equipo1.País + " empata " + equipo2.País);
-     else if(-100<difPuntaje && difPuntaje<0)
-    	 System.out.println(equipo1.País + " tiene una ligera desventaja contra " + equipo2.País);
-     else if(difPuntaje==0)
+     else if ((difPuntaje>-100) && (difPuntaje<100))
+    	 System.out.println(equipo1.País + " empata a " + equipo2.País);
+     else if(difPuntaje<=-100)
+    	 System.out.println(equipo1.País + " pierde contra " + equipo2.País);
+     
+     
+     
+     
+     
+     
+     
+     
+     
+  /*   else if(difPuntaje==0)
     	 System.out.println("Ambos equipos estan igualados");
      else if (difPuntaje>0 && difPuntaje<=100)
     	 System.out.println(equipo1.País + " tiene una ligera ventaja contra " + equipo2.País);
@@ -108,7 +97,7 @@ public class equipo{
      else if (difPuntaje>200)
     	 System.out.println(equipo1.País + " tiene una probabilidad muy alta de ganar contra " + equipo2.País);
     	 
-    	 
+    	 */
     	 
     	 		
     	 
