@@ -1,15 +1,23 @@
+import java.util.ArrayList;
 import java.io.FileReader;
 import java.io.IOException;
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 public class equipo{
 	//Creador de equipos
 	String País;
 	int Puntaje=0;
 	int PuntajeFIFA;
+	
+	
+	
+	
+	
+
+	
 	            
 	/*public static equipo CreadorEquiposAuto(String direccion, int numeroDeFila) throws IOException{
 		CSVReader reader = new CSVReader(new FileReader(direccion));
@@ -32,17 +40,20 @@ public class equipo{
 		
 	}*/
 	
-	public static List<equipo> crearEquiposAuto(String direccion)throws IOException, CsvValidationException, NumberFormatException{
-
+	public List<equipo> crearEquiposAuto()throws IOException, CsvValidationException, NumberFormatException{
+    String direccion=("D:\\Repositorios\\Integrador-UTN-java2023\\Integrador\\ExcelEquipos.csv");
 	List<equipo> equipos=new ArrayList<>();
 	FileReader ArchivoCSV = new FileReader(direccion);
-	 CSVReader ArchivoCSVLeido = new CSVReader(ArchivoCSV);
+	 @SuppressWarnings("resource")
+	CSVReader ArchivoCSVLeido = new CSVReader(ArchivoCSV);
+	 
 	 String[] FilaActual;
 	 while ((FilaActual=ArchivoCSVLeido.readNext())!=null) {
 		 equipo NuevoEquipo=new equipo();
-		 NuevoEquipo.País=FilaActual[2];
-		 NuevoEquipo.PuntajeFIFA=Integer.parseInt(FilaActual[4]);
+		 NuevoEquipo.País=FilaActual[1];
+		 NuevoEquipo.PuntajeFIFA=Integer.parseInt(FilaActual[3]);
 		 equipos.add(NuevoEquipo);
+		 
 	 }
 	 
 	
@@ -57,7 +68,22 @@ public class equipo{
 	*/
 	
 	
+	//getter que me otorga un equipo ingresando el parametro pais
+	public static equipo getEquipo(String País,List<equipo> equipos){
 	
+	
+		for (int i = 0; i < equipos.size(); i++) {
+	equipo placeholder=equipos.get(i);
+	if (País.equals(placeholder.País)) {
+		//placeholder.PuntajeFIFA=equipos.get(i).PuntajeFIFA;
+		
+		
+		return equipos.get(i);}
+
+	
+		 }
+	return null;
+}
 	
 	
 	
@@ -67,10 +93,10 @@ public class equipo{
      int difPuntaje=equipo1.PuntajeFIFA-equipo2.PuntajeFIFA;
 //encuentro la diferencia de puntos y a partir de esta imprimo en consola
 //la diferencia de habilidad entre equipos
-     if (difPuntaje<=-200)
-    	 System.out.println(equipo1.País + " tiene una muy baja probabilidad de ganar contra " + equipo2.País);
-     else if (-200<difPuntaje && difPuntaje<=-100)
-    	 System.out.println(equipo1.País + " tiene una desventaja considerable contra " + equipo2.País);
+     if (difPuntaje<=-100)
+    	 System.out.println(equipo1.País + " gana a " + equipo2.País);
+     else if ((difPuntos>100) && (difPuntos<-100))
+    	 System.out.println(equipo1.País + " empata " + equipo2.País);
      else if(-100<difPuntaje && difPuntaje<0)
     	 System.out.println(equipo1.País + " tiene una ligera desventaja contra " + equipo2.País);
      else if(difPuntaje==0)
@@ -84,7 +110,7 @@ public class equipo{
     	 
     	 
     	 
-    	 
+    	 		
     	 
     	 
     	 

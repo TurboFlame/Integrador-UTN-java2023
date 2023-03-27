@@ -1,4 +1,5 @@
 
+
 public class grupo{
 //creador de grupos
 	public equipo[] equipos;
@@ -8,7 +9,7 @@ public class grupo{
 	public int sumaPuntos;
 	
 	
-	public int getSumPFIFA() {
+	/*public int getSumPFIFA() {
 	//funcion que suma los puntos de los equipos dentro de un grupo
 	int SumPFIFA=0;
 	
@@ -19,4 +20,4 @@ public class grupo{
 	return SumPFIFA;
 	
 	}
-}
+*/}
