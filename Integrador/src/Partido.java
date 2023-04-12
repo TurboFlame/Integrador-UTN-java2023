@@ -1,6 +1,7 @@
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.opencsv.CSVReader;
@@ -18,12 +19,12 @@ public class Partido {
 	
 	
 	//este metodo es similar al crearEquipos. Coloca los partidos en una lista trayendolos del archivo CSV.
-	public static List<Partido> getPartidos() throws IOException, CsvValidationException, NumberFormatException{
+	public static HashMap<String, Partido> getPartidos() throws IOException, CsvValidationException, NumberFormatException{
 		
 		String direccion2=("D:\\Repositorios\\Integrador-UTN-java2023\\Integrador\\ExcelPartidos.csv");
 		FileReader ArchivoCSV2 = new FileReader(direccion2);
 		 CSVReader ArchivoCSVLeido2 = new CSVReader(ArchivoCSV2);
-		 List<Partido> Partidos=new ArrayList<>();
+		 HashMap<String, Partido> Partidos=new HashMap<>();
 		 String[] FilaActual2;
 		 
 		 
@@ -36,7 +37,7 @@ public class Partido {
              nuevoPartido.Equipo1=FilaActual2[0];
 			 nuevoPartido.Equipo2=FilaActual2[1];
 			 
-			 Partidos.add(nuevoPartido);
+			 Partidos.put(nuevoPartido.nombrePartido,nuevoPartido);
 		     }
 			 return Partidos;
 			 
@@ -56,16 +57,16 @@ public class Partido {
 	return null;
 	}
 	
-	
+					
 	
 	//Este metodo sirve para calcular que equipos ganaron, perdieron o empataron calculando
 	//la diferencia de goles, y asi mismo otorga un String con el nombre del ganador. Estos 
 	//Strings son devueltos en un array list.
-     public List<String> setGanadores(List<Partido> partidosList) {
+     public List<String> setGanadores(HashMap<String,Partido> partidosHash) {
     	 List<String> Ganadores = new ArrayList<String>();
-      for (int i=0;i<(partidosList.size());i++){
+    	 for (Partido e : partidosHash.values()) {
     	  
-    	  Partido partidoPlaceholder=partidosList.get(i);
+    	  Partido partidoPlaceholder=e;
     	  
     	        if (partidoPlaceholder.golesEquipo1>partidoPlaceholder.golesEquipo2) {
     	        partidoPlaceholder.ganador=partidoPlaceholder.Equipo1;}
@@ -80,8 +81,7 @@ public class Partido {
       return Ganadores;
       }
      
-     
-     
+    
      
      
 //Este metodo sirve para dar un resultado predictivo de los partidos a partir del ranking fifa.
@@ -90,26 +90,32 @@ public class Partido {
  		ArrayList<String> predicciones=new ArrayList<String>();
  		equipo EquipoGenerico=new equipo();
  		
- 		List<equipo> equiposlist = EquipoGenerico.crearEquiposAuto();
- 	    Partido partidoPlaceholder = null;
- 	      List<Partido> Partidos=partidoPlaceholder.getPartidos();
- 	    for (int i=0;i<Partidos.size();i++) {
+ 		 HashMap<String, equipo>  equiposHash = EquipoGenerico.crearEquiposAuto();
+ 	     HashMap<String, Partido> PartidosHash=Partido.getPartidos();
+ 	    for (Partido e : PartidosHash.values()) {
  	    	
- 	        Partido partidoReferencia=Partidos.get(i);
+ 	        Partido partidoReferencia=e;
  	        	equipo primerEquipo;
  	            equipo segundoEquipo;
- 	            primerEquipo=equipo.getEquipo(partidoReferencia.Equipo1, equiposlist);
- 	            segundoEquipo=equipo.getEquipo(partidoReferencia.Equipo2, equiposlist);
+ 	            primerEquipo=equiposHash.get(e.Equipo1);
+ 	            segundoEquipo=equiposHash.get(e.Equipo2);
  	   
  	            
  	            int difPuntos=primerEquipo.PuntajeFIFA-segundoEquipo.PuntajeFIFA;
  	           
- 	            if (difPuntos<-100)
+ 	            if (difPuntos<-100) {       
  	            	predicciones.add(partidoReferencia.Equipo2);
- 	            else if (difPuntos>100)
+ 	            	System.out.println(partidoReferencia.Equipo2 + " es el ganador contra " + partidoReferencia.Equipo1);
+ 	            }
+ 	            
+ 	            else if (difPuntos>100) {
  	            	predicciones.add(partidoReferencia.Equipo1);
- 	           else if ((difPuntos<100) && (difPuntos>-100))
+ 	            	System.out.println(partidoReferencia.Equipo1 + " es el ganador contra " + partidoReferencia.Equipo2);
+ 	            }
+ 	           else if ((difPuntos<100) && (difPuntos>-100)) {
  	        	   predicciones.add("empate");
+ 	        	   System.out.println(partidoReferencia.Equipo1+" y "+partidoReferencia.Equipo2 + " empataron");
+ 	           }
  	           else{
  	           // System.out.println("hola");
  	            predicciones.add("null");

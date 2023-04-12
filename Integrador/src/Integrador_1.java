@@ -1,8 +1,8 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import com.opencsv.exceptions.CsvValidationException;
-import java.util.ArrayList;
 public class Integrador_1 {
 
 	public static void main(String[] args) throws CsvValidationException, NumberFormatException, IOException {
@@ -19,21 +19,22 @@ public class Integrador_1 {
 	 * 
 	 */
 		
+		
+		
+		//Recordar: Considerar usar HashMap para simplificar el uso de getters
+		//de los objetos de las listas
+		
+		
 
 		
-		equipo equipoGenerico=new equipo();
+		
 		Partido partidoGenerico = new Partido();
-		List<equipo> equiposlist = equipoGenerico.crearEquiposAuto();
-		List<Partido> partidoslist=new ArrayList<>();
-		partidoslist=Partido.getPartidos();
 		
-		
-		
-		
-		equipo equipoejemplo=equipoGenerico.getEquipo("Mexico", equiposlist);
+	    HashMap<String,Partido> partidosHash=new HashMap<String,Partido>();
+		partidosHash=Partido.getPartidos();
 		
 	
-		List<String> resultados=partidoGenerico.setGanadores(partidoslist);
+		List<String> resultados=partidoGenerico.setGanadores(partidosHash);
 		
 		List<String> resultadosPredictivos=partidoGenerico.PartidosPredictivos();
 		

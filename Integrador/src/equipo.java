@@ -1,7 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
@@ -12,26 +12,29 @@ public class equipo{
 	String País;
 	int Puntaje=0;
 	int PuntajeFIFA;
-
+    String grupo;
+    String clave;
 	            
 	
 	
 	
 	//con este metodo coloco todos los equipos en un array list.
-	public List<equipo> crearEquiposAuto()throws IOException, CsvValidationException, NumberFormatException{
+	public HashMap<String, equipo> crearEquiposAuto()throws IOException, CsvValidationException, NumberFormatException{
     String direccion=("D:\\Repositorios\\Integrador-UTN-java2023\\Integrador\\ExcelEquipos.csv");
-	List<equipo> equipos=new ArrayList<>();
+    HashMap<String, equipo> equipos	 = new HashMap<>();
 	FileReader ArchivoCSV = new FileReader(direccion);
 	 @SuppressWarnings("resource")
 	CSVReader ArchivoCSVLeido = new CSVReader(ArchivoCSV);
 	 
-	 String[] FilaActual;
+	 String[] FilaActual;							
 	 while ((FilaActual=ArchivoCSVLeido.readNext())!=null) {
 		 equipo NuevoEquipo=new equipo();
 		 NuevoEquipo.País=FilaActual[1];
 		 NuevoEquipo.PuntajeFIFA=Integer.parseInt(FilaActual[3]);
-		 equipos.add(NuevoEquipo);
-		 
+		 NuevoEquipo.grupo=FilaActual[2];
+		 NuevoEquipo.clave=FilaActual[0];
+		 equipos.put(FilaActual[0],NuevoEquipo);
+		 	
 	 }
 	 
 	
@@ -39,16 +42,13 @@ public class equipo{
     }
 	
 	
-	/*para continuar mañana, tengo que hacer un getter que a partir de un atributo del objeto (pais en este caso) me otorgue el objeto trabajado para poder llamar 
-	al pais luego. Tambien tengo que hacer una clase de Partidos predictivos, puedo hacer que en cada if ddel metodo prediccion me devuelva el dato de si empato, perdio o gano
-	segun la prediccion, y por ultimo crear la clase de Partidos terminados que registre desde un CSV los partidos jugados, y terminar con un metodo que compare los partidos predictivos con los jugados
-	y puntue segun la prediccion obtenida.
-	*/
+	/*
+	Metodo obsoleto tras el revamp del codigo utilizando HashMap en lugar de List
 	
 	
-	//Este metodo es basicamente un getter que compara el nombre del equipo con un String que se le provea y otorga el objeto que coincida.
-	//Lo utilizo ya que por el metodo usado para crear los array list no encontre la manera de llamar a los objetos
-	//individualmente de forma tradicional
+	Este metodo es basicamente un getter que compara el nombre del equipo con un String que se le provea y otorga el objeto que coincida.
+	Lo utilizo ya que por el metodo usado para crear los array list no encontre la manera de llamar a los objetos
+	individualmente de forma tradicional
 	public static equipo getEquipo(String País,List<equipo> equipos){
 	
 	
@@ -64,7 +64,9 @@ public class equipo{
 		 }
 	return null;
 }
-	
+
+
+	*/
 	
 	
 	//este metodo fue un "prototipo" del metodo de prediccion. Lo mantengo disponible ya que
