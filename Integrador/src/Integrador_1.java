@@ -34,30 +34,20 @@ public class Integrador_1 {
          
 		
 		/*Loop que itera sobre cada prediccion de los usuarios y compara los resultados
-		 * predictivos con el partido real. Tambien da una puntuacion a los usuarios dependiendo
+		  predictivos con el partido real. Tambien da una puntuacion a los usuarios dependiendo
 		 su prediccion*/
 		while(rs.next()){
-			
 			List<String> prediccionesUsuario=new ArrayList<String>();
-		
-            prediccionesUsuario.add(rs.getString(7));
+			
             prediccionesUsuario.add(rs.getString(1));
-            prediccionesUsuario.add(rs.getString(2));
-            prediccionesUsuario.add(rs.getString(3));
-            prediccionesUsuario.add(rs.getString(4));
-            prediccionesUsuario.add(rs.getString(5));
-            prediccionesUsuario.add(rs.getString(6));
             
-           
+            for (int i=2;i<=rs.getMetaData().getColumnCount();i++) {
+            prediccionesUsuario.add(rs.getString(i)); 
+                          }  
             
             Partido.comparacion(resultados, prediccionesUsuario);
-            
-	
-
-			
-			
-		   }
-	   }
+		       }
+		}
 
 	}
 

@@ -4,6 +4,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import com.opencsv.exceptions.CsvValidationException;
 
 
@@ -41,6 +44,7 @@ public class Partido {
 		
 	
 	//Este metodo setea los ganadores de cada partido a partir de la diferencia de goles
+	//en una lista de Strings
     static public List<String> setGanadores(LinkedHashMap<String,Partido> partidosHash,LinkedHashMap<String,equipo> equiposHash) {
     	 List<String> Ganadores = new ArrayList<String>();
     	 Ganadores.add("null");
@@ -89,7 +93,6 @@ public class Partido {
  	            
  	       try {
  	        	   
- 	        	   
  	            if (difPuntos<-100) {       
  	            	predicciones.add(partidoReferencia.Equipo2);
  	            }
@@ -115,12 +118,14 @@ public class Partido {
  	de partidos jugados. Por cada caso en que el ganador del partido coincide con 
  	la prediccion, suma un punto a quien hizo la prediccion.*/
   static public void comparacion (List<String> resultados,List<String> predicciones) {
- 	int puntuacion=0;
+ 	  int puntuacion=0;
  	        for(int i=0;i<predicciones.size();i++) {
  	        	
  	        	if (resultados.get(i).equals(predicciones.get(i)))
- 	        		puntuacion ++;
+ 	        		puntuacion++;
  	        }
+ 	       int multiplicador=Integer.parseInt(JOptionPane.showInputDialog("Introduce la cantidad de puntos otorgados por acierto, " + predicciones.get(0)));
+ 	       puntuacion=puntuacion*multiplicador;
  	       System.out.println("La puntuacion de " + predicciones.get(0) + " es de " + puntuacion);
        }
   
