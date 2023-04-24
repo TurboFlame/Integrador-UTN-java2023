@@ -33,7 +33,9 @@ public class Integrador_1 {
 		ResultSet rs=Conexion.getResultSet("predicciones");
          
 		
-		
+		/*Loop que itera sobre cada prediccion de los usuarios y compara los resultados
+		 * predictivos con el partido real. Tambien da una puntuacion a los usuarios dependiendo
+		 su prediccion*/
 		while(rs.next()){
 			
 			List<String> prediccionesUsuario=new ArrayList<String>();
